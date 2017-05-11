@@ -1,0 +1,44 @@
+---
+title: "bets.sidra"
+author: "Fernando Teixeira"
+date: "11 de maio de 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r sidra1}
+sidra=ecoseries::series_sidra(x = c(1612), from = 1990, to = 2015, territory = "brazil")
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r sidra2}
+sidra=ecoseries::series_sidra(x = c(3653), from = c("200201"), 
+                   to = c("201512"), territory = "brazil", 
+                   variable = 3135, sections = c(129316,129330),
+                   cl = 544)
+```
+
+
+
+## 
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r sidra3}
+sidra=ecoseries::series_sidra(x = c(1618), from = c("201703"), to = c("201703"), 
+                   territory = "brazil", variable = 109, sections=list(c(39427),
+                                                                       c(39437,39441)), 
+                   cl = c(49, 48))
+```
