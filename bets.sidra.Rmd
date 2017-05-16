@@ -1,27 +1,46 @@
 ---
-title: "bets.sidra"
-author: "Fernando Teixeira"
-date: "11 de maio de 2017"
-output: html_document
+title: "BETS.sidra"
+author: "Pedro Costa Ferreira, Talitha Speranza e Fernando Teixeira"
+date: "16 de maio de 2017"
+output: 
+    ioslides_presentation:
+        css: temp.css
+        widescreen: true
+        smaller: true
+        fig_width: 2
+        fig_height: 3
+        fig_caption: true
+    
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+## Descrição dos parâmetros
 
-```{r sidra1}
-sidra=ecoseries::series_sidra(x = c(1612), from = 1990, to = 2015, territory = "brazil")
-```
+ * <b>x:</b> Número da série
+ 
+ * <b>from:</b> String ou vetor de caracter specificando a data de início da série (padrão é 1980)
+ 
+ * <b>to:</b> String ou vetor de caracter specificando a data de fim da série (padrão é ano atual)
+  
+ * <b>territory:</b> Especifica o nível territorial da pesquisa
+ 
+ * <b>variable:</b> Um valor com o código da variável desejada (padrão é selecionar todas as existentes)
+ 
+ * <b>cl:</b> Vetor contendo as classificações desejadas
+ 
+ * <b>sections:</b> Vetor ou lista de vetores (se houver mais de duas classificações) contendo as tabelas desejadas
 
-## Including Plots
 
-You can also embed plots, for example:
+
+
+## Pesquisa Industrial Mensal - Produção Física
+
+
 
 ```{r sidra2}
 sidra=ecoseries::series_sidra(x = c(3653), from = c("200201"), 
@@ -30,15 +49,53 @@ sidra=ecoseries::series_sidra(x = c(3653), from = c("200201"),
                    cl = 544)
 ```
 
+![](img/sidra3653.png){.classname}
+![](img/sidra3653_out.png){.classname}
 
 
-## 
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## Sistema de Produção Agrícola
 
 ```{r sidra3}
-sidra=ecoseries::series_sidra(x = c(1618), from = c("201703"), to = c("201703"), 
+sidra=ecoseries::series_sidra(x = c(1618), from = c("201704"), to = c("201704"), 
                    territory = "brazil", variable = 109, sections=list(c(39427),
                                                                        c(39437,39441)), 
                    cl = c(49, 48))
+```
+
+
+![](img/sidra.png){.classname}
+![](img/sidra_out.png){.classname}
+
+
+
+## Contas Nacionais Trimestrais
+
+
+
+
+```{r sidra4}
+sidra = ecoseries::series_sidra(x = 1620, from = 199001, to = 201701,  territory = "brazil",
+                     sections=list(c(90687)), cl =c(11255), variable = 583)
+
+print(sidra$serie_1620)
+```
+
+
+
+## Formato Output
+
+
+* Sidra devolve lista de strings
+
+* As colunas de data e valor são transformadas em objetos 'Date' e 'numeric', respectivamente
+
+<br>
+<br>
+
+
+```{r sidra5}
+str(sidra$serie_1620$Data)
+str(sidra$serie_1620$Valor)
+
 ```
